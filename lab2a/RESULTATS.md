@@ -5,10 +5,11 @@
 
 ---
 
-### 1. Tableau des mesures réelles obtenues
+### 1.Mesures réelles obtenues
 
 | Configuration | Débit (req/s) | Latence moyenne (ms) | Erreurs (sur 200) | Observation |
 |---|---|---|---|---|
+
 | **Étape 2 : Monolithe unique (5001)** | 11.3 | 734.1 | 7 / 200 | Mesure de référence sur instance seule |
 | **Étape 2 (bis) : Panne du Monolithe** | 4.9 | 2044.6 | 200 / 200 | **SPOF confirmé** (indisponibilité totale 100%) |
 | **Étape 3 : 2 instances + Répartiteur (8000)** | 15.9 | 553.9 | **0 / 200** | Gain de débit (+40%) et réduction de latence |
@@ -31,7 +32,7 @@ Chaque instance a exécuté les écritures dans son fichier local SQLite (`monol
 ### 3. Réponses aux questions de compréhension (Support p. 52)
 
 #### Q1 : Analyse des écarts de performance
-Avec deux instances derrière le répartiteur, le débit passe de 11.3 req/s à 15.9 req/s et la latence moyenne chute de 734 ms à 554 ms : les requêtes sont parallélisées entre les processus. Lors de la coupure de l'instance 5002, le débit chute à 7.1 req/s et la latence grimpe à 1165 ms car le répartiteur subit un timeout sur 5002 avant de rebasculer sur 5001, mais **aucune requête n'est perdue (0 erreur)**.
+Avec deux instances derrière le répartiteur, le débit passe de 11.3 req/s à 15.9 req/s et la latence moyenne chute de 734ms à 554ms : les requêtes sont parallélisées entre les processus. Lors de la coupure de l'instance 5002, le débit chute à 7.1 req/s et la latence grimpe à 1165 ms car le répartiteur subit un timeout sur 5002 avant de rebasculer sur 5001, mais **aucune requête n'est perdue (0 erreur)**.
 
 #### Q2 : Pourquoi les soldes sont différents et quel risque en production ?
 Les instances 5001 et 5002 possèdent chacune leur propre base de données SQLite locale isolée. Les débits effectués via l'instance 5001 ne sont jamais répercutés sur 5002. Dans un système bancaire réel, cela entraînerait des incohérences comptables critiques et le risque de dépense double (un client pourrait vider son compte sur deux nœuds différents).

@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "chapitre": 1,
+  "equipe": "E05",
+  "membre": "Ndengue Hogbe Fred Martin",
+  "date_utc": "2026-11-06T14:39:33+00:00",
+  "parametres": {
+    "timeout_s": 1,
+    "delai_serveur_s": 2,
+    "montant": 6000
+  },
+  "mesures": {
+    "latence_connexion_ms_moy": 0.3422,
+    "latence_connexion_ms_min": 0.2415,
+    "duree_scenario_a_s": 2.012,
+    "duree_scenario_b_s": 2.011
+  },
+  "resultats": {
+    "executions_sans_idempotence": 2,
+    "executions_avec_idempotence": 1
+  },
+  "fichiers": {
+    "serveur_py": true,
+    "client_py": true,
+    "client_reessaie": true
+  },
+  "environnement": {
+    "python": "3.11.9",
+    "systeme": "Windows",
+    "hote": "4c5ae26643"
+  },
+  "git": {
+    "commits": "3",
+    "auteur": "EkoudiAkam"
+  },
+  "empreinte": "c77ddef64725f1be09246880249fd8b333b490f1554dd56d5ff0fd0b120d1312"
+}
